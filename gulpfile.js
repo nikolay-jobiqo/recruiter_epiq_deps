@@ -38,13 +38,16 @@ gulp.task("images", function () {
 });
 
 gulp.task("sass", function () {
-  var prefix, sass;
+  var prefix, sass, sourcemaps;
+  sourcemaps = require('gulp-sourcemaps');
   sass = require("gulp-sass");
   prefix = require("gulp-autoprefixer");
   return gulp
     .src(paths.sass)
+    .pipe(sourcemaps.init())
     .pipe(sass().on("error", sass.logError))
     .pipe(prefix())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest("../../dist/css"));
 });
 
